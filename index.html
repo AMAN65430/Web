@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dixit Legal Co. Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- LOGIN PAGE -->
+  <div class="container" id="loginPage">
+    <div class="logo">Dixit Legal Co.</div>
+    <form onsubmit="return false;">
+      <label>Mobile Number</label>
+      <input type="text" id="loginMobile" class="input-box" placeholder="+91 Enter your mobile number" required>
+      <label>Password</label>
+      <input type="password" id="loginPassword" class="input-box" placeholder="Enter your password" required>
+      <button type="button" class="btn btn-purple" onclick="login()">Login</button>
+      <button type="button" class="btn btn-blue" onclick="showSignUp()">Sign Up</button>
+      <div id="loginMessage" class="message"></div>
+    </form>
+  </div>
+
+  <!-- SIGNUP PAGE -->
+  <div class="container" id="signUpPage">
+    <div class="logo">Dixit Legal Co.</div>
+    <form onsubmit="return false;">
+      <label>Name</label>
+      <input type="text" id="name" class="input-box" placeholder="Name" required>
+      <label>Father Name</label>
+      <input type="text" id="fathername" class="input-box" placeholder="Father Name" required>
+      <label>E-mail</label>
+      <input type="email" id="email" class="input-box" placeholder="@gmail.com" required>
+      <label>Mobile Number</label>
+      <input type="text" id="signUpMobile" class="input-box" placeholder="+91 Enter your mobile number" required>
+      <label>Aadhar Number</label>
+      <input type="text" id="Aadhar" class="input-box" placeholder="Aadhar Number" required>
+      <label>Password</label>
+      <input type="password" id="password" class="input-box" placeholder="Password" required>
+      <label>College</label>
+      <select id="college" class="select-box" required>
+        <option value="">-- Select College --</option>
+        <option value="MIET">MIET</option>
+        <option value="MIE">MIE</option>
+        <option value="BIT">BIT</option>
+      </select>
+      <button type="button" class="btn btn-purple" onclick="signUp()">Register</button>
+      <button type="button" class="btn btn-blue" onclick="showLogin()">Back to Login</button>
+      <div id="signUpMessage" class="message"></div>
+    </form>
+  </div>
+
+  <!-- SHOP PAGE -->
+  <div id="shopPage">
+    <div class="user-icon" onclick="toggleUserPanel()">👨🏻‍💼</div>
+
+    <!-- USER PROFILE PANEL -->
+    <div id="userPanel">
+      <h3>User Profile</h3>
+      <form onsubmit="return false;">
+        <label>Name</label>
+        <input type="text" id="panelName" class="input-box">
+        <label>Father Name</label>
+        <input type="text" id="panelFatherName" class="input-box">
+        <label>Email</label>
+        <input type="email" id="panelEmail" class="input-box">
+        <label>Mobile</label>
+        <input type="text" id="panelMobile" class="input-box" disabled>
+        <label>Aadhar</label>
+        <input type="text" id="panelAadhar" class="input-box">
+        <label>College</label>
+        <select id="panelCollege" class="select-box">
+          <option value="MIET">MIET</option>
+          <option value="MIE">MIE</option>
+          <option value="BIT">BIT</option>
+        </select>
+        <button type="button" class="btn btn-purple" onclick="saveUserDetails()">Save Changes</button>
+        <button type="button" class="btn btn-red" onclick="logout()">Logout</button>
+        <div id="panelMessage" class="message"></div>
+      </form>
+    </div>
+
+    <div class="shop-header">Welcome to Dixit Legal Co.</div>
+    <div class="products">
+      <div class="product">
+        <img src="images/Scholarship Affidavit.jpg" alt="Scholarship Affidavit">
+        <h4>Scholarship Affidavit</h4>
+        <button class="btn btn-purple" onclick="addToCart('Scholarship Affidavit', 250)">Add</button>
+        <button class="btn btn-red" onclick="removeFromCart('Scholarship Affidavit')">Remove</button>
+      </div>
+      <div class="product">
+        <img src="images/Gap Affidavit.jpg" alt="Gap Affidavit">
+        <h4>Gap Affidavit</h4>
+        <button class="btn btn-purple" onclick="addToCart('Gap Affidavit', 100)">Add</button>
+        <button class="btn btn-red" onclick="removeFromCart('Gap Affidavit')">Remove</button>
+      </div>
+      <div class="product">
+        <img src="images/Both Scholarship & Gap Affidavit.jpg" alt="Both Scholarship & Gap Affidavit">
+        <h4>Both Scholarship & Gap Affidavit</h4>
+        <button class="btn btn-purple" onclick="addToCart('Both Scholarship & Gap Affidavit', 350)">Add</button>
+        <button class="btn btn-red" onclick="removeFromCart('Both Scholarship & Gap Affidavit')">Remove</button>
+      </div>
+      <div class="product">
+        <img src="images/Data Correction For Tablet Affidavit.jpg" alt="Data Correction For Tablet Affidavit">
+        <h4>Data Correction For Tablet Affidavit</h4>
+        <button class="btn btn-purple" onclick="addToCart('Data Correction For Tablet Affidavit', 100)">Add</button>
+        <button class="btn btn-red" onclick="removeFromCart('Data Correction For Tablet Affidavit')">Remove</button>
+      </div>
+      <div class="product">
+        <img src="images/Attendance short Affidavit.jpg" alt="Attendance short Affidavit">
+        <h4>Attendance short Affidavit</h4>
+        <button class="btn btn-purple" onclick="addToCart('Attendance short Affidavit', 100)">Add</button>
+        <button class="btn btn-red" onclick="removeFromCart('Attendance short Affidavit')">Remove</button>
+      </div>
+    </div>
+
+    <!-- CART -->
+    <div class="cart">
+      <h3>Your Cart</h3>
+      <p><b>User:</b> <span id="userName"></span> (<span id="userMobile"></span>)</p>
+      <p><b>Father Name:</b> <span id="userFatherName"></span></p>
+      <p><b>Email:</b> <span id="userEmail"></span></p>
+      <p><b>College:</b> <span id="userCollege"></span></p>
+      <ul id="cartItems"></ul>
+      <p><b>Total:</b> ₹<span id="cartTotal">0</span></p>
+      <button class="btn btn-blue" onclick="goToCheckout()">Proceed to Checkout</button>
+      <button class="btn btn-purple" onclick="logout()">Logout</button>
+    </div>
+  </div>
+
+  <!-- CHECKOUT PAGE -->
+  <div class="container" id="checkoutPage">
+    <h2>Checkout</h2>
+    <p><b>Total Amount:</b> ₹<span id="checkoutTotal">0</span></p>
+    <label>Payment Method</label>
+    <select id="payment" class="select-box" required>
+      <option value="">-- Select Payment Method --</option>
+      <option value="Card">Credit/Debit Card</option>
+      <option value="UPI">UPI</option>
+    </select>
+    <button class="btn btn-purple" onclick="placeOrder()">Place Order</button>
+    <button class="btn btn-blue" onclick="backToCart()">Back to Cart</button>
+    <div id="orderMessage" class="message"></div>
+  </div>
+
+  <script>
+    let currentUser = null;
+    let cart = [];
+  </script>
+  <script src="app.js"></script>
+</body>
+</html>
